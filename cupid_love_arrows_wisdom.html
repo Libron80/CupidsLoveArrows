@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cupid's Love Arrows</title>
+    <style>
+        body {
+            font-family: "Georgia", serif;
+            background-color: #f7f1f1;
+            text-align: center;
+            padding: 50px;
+            background-image: url('https://www.transparenttextures.com/patterns/linen.png'), radial-gradient(circle at top right, #ffb6c1, #ff69b4, #ff1493); 
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #8b0000;
+            text-shadow: 1px 1px 2px #d3d3d3;
+        }
+
+        .message-box {
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #8b0000;
+            border-radius: 12px;
+            width: 80%;
+            background-color: #fffaf0;
+            font-size: 1.5em;
+            min-height: 100px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #revealButton {
+            padding: 12px 25px;
+            background-color: #b22222;
+            color: white;
+            border: 2px solid #8b0000;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: "Georgia", serif;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #revealButton:hover {
+            background-color: #8b0000;
+        }
+
+        /* Button glow effect on click */
+        #revealButton:active {
+            box-shadow: 0 0 15px #ff69b4, 0 0 25px #ff69b4, 0 0 35px #ff69b4;
+        }
+
+        /* Cupid background created with CSS */
+        #cupidBackground {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 100px;
+            height: 100px;
+            background-color: #ff69b4;
+            border-radius: 50%;
+            box-shadow: 0 0 20px 10px rgba(255, 182, 193, 0.5);
+            z-index: -1;
+        }
+
+        #cupidArrow {
+            position: absolute;
+            top: 75px;
+            left: 100px;
+            width: 100px;
+            height: 3px;
+            background-color: #ff1493;
+            transform: rotate(-45deg);
+            transform-origin: 0 50%;
+        }
+
+        #cupidArrow:after {
+            content: "";
+            position: absolute;
+            right: -10px;
+            top: -6px;
+            border: 5px solid transparent;
+            border-left-color: #ff1493;
+            border-right: none;
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 1em;
+            color: #8b0000;
+        }
+
+        p {
+            font-family: "Times New Roman", serif;
+            font-size: 1.3em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cupid's Love Arrows</h1>
+    <p>Click the button to reveal a timeless love message from Cupid!</p>
+
+    <div id="cupidBackground"></div>
+    <div id="cupidArrow"></div>
+
+    <div class="message-box" id="messageBox">
+        <p>Press the button to get your message!</p>
+
+    </div>
+
+    <button id="revealButton">Reveal Your Love Message</button>
+
+    <footer>© 2024 Miguel A. Cartagena</footer>
+
+    <script>
+        // Array of 55 unique messages and corresponding symbols
+        const messages = [{'message': "Love is not about possession, it's about appreciation. True love liberates, not confines.", 'symbol': '💖'}, {'message': 'In every relationship, honesty is the highest form of respect. Without truth, love cannot grow.', 'symbol': '💝'}, {'message': 'Real love comes when you are comfortable enough to be vulnerable, to show your imperfections.', 'symbol': '💕'}, {'message': 'The strongest relationships are built on shared values, not just shared moments.', 'symbol': '💞'}, {'message': 'True love is not finding someone who completes you, but finding someone who helps you grow.', 'symbol': '💘'}, {'message': 'Love is a choice you make every day, not a feeling that lasts by chance.', 'symbol': '💓'}, {'message': 'In relationships, listening is often more powerful than speaking. Seek to understand, not just to be heard.', 'symbol': '💗'}, {'message': 'Forgiveness is the foundation of lasting love. Without it, no relationship can thrive.', 'symbol': '💟'}, {'message': 'A great relationship isn’t about perfection; it’s about accepting each other’s flaws and working through challenges together.', 'symbol': '💌'}, {'message': 'Commitment isn’t just about staying together, it’s about growing together.', 'symbol': '❤️'}, {'message': 'When love is guided by compassion, it transcends all difficulties.', 'symbol': '💙'}, {'message': 'True love is not about grand gestures but about the consistency in small acts of kindness.', 'symbol': '💚'}, {'message': "In every relationship, there will be storms. It's how you weather them together that defines your love.", 'symbol': '💛'}, {'message': 'Love without respect is fragile; respect without love is cold. The two must coexist for harmony.', 'symbol': '💜'}, {'message': 'The deepest connections come from emotional vulnerability, not physical proximity.', 'symbol': '🧡'}, {'message': 'To love someone deeply, you must first understand yourself. Only then can you love without conditions.', 'symbol': '💫'}, {'message': 'The greatest gift you can offer someone is your time, for it is a part of your life that you will never get back.', 'symbol': '💥'}, {'message': 'True love is less about looking into each other’s eyes, and more about looking in the same direction.', 'symbol': '🎇'}, {'message': 'Relationships require constant work, but that work should never feel like a burden. It’s an investment in each other.', 'symbol': '🎆'}, {'message': 'Love doesn’t mean never arguing; it means valuing the relationship enough to work through disagreements.', 'symbol': '🌟'}, {'message': 'Growth and love are intertwined. A relationship that isn’t growing is slowly dying.', 'symbol': '✨'}, {'message': 'The most powerful love is the one that pushes you to be your best, even when it’s hard.', 'symbol': '🌹'}, {'message': 'Real love understands that change is inevitable. It adapts, adjusts, and flourishes with it.', 'symbol': '🌸'}, {'message': 'Don’t seek love for validation; seek love for connection and partnership.', 'symbol': '🌷'}, {'message': 'Love without boundaries isn’t true love. Healthy boundaries protect and nurture love.', 'symbol': '🌺'}, {'message': 'The hardest part of love is knowing when to let go. Sometimes, love means allowing space to grow separately.', 'symbol': '🍀'}, {'message': 'True love will challenge you. It will bring out your insecurities, but also your potential.', 'symbol': '🍂'}, {'message': 'Love is not about always agreeing; it’s about learning from each other’s differences.', 'symbol': '🌻'}, {'message': 'A relationship built on love must also be built on trust. Without trust, love is a fleeting illusion.', 'symbol': '🌼'}, {'message': 'Love doesn’t demand attention; it creates a space where attention is willingly given.', 'symbol': '🌙'}, {'message': 'The best relationships thrive not because they’re easy, but because both partners are willing to work through the difficult times.', 'symbol': '⭐'}, {'message': 'To truly love someone is to love them even in their darkest moments, when they are hardest to love.', 'symbol': '🎀'}, {'message': 'In relationships, silence is sometimes more powerful than words. Learn to sit in it without discomfort.', 'symbol': '🎁'}, {'message': 'A strong relationship isn’t about how you handle the good times, but how you navigate the bad ones together.', 'symbol': '🧸'}, {'message': 'True love isn’t about possession; it’s about partnership and growth.', 'symbol': '🦋'}, {'message': 'Love that lasts is love that is based on mutual respect and deep understanding, not just passion.', 'symbol': '🐦'}, {'message': 'Relationships don’t fail because of a lack of love but because of a lack of effort and understanding.', 'symbol': '🌿'}, {'message': 'Love isn’t about giving someone what they want; it’s about giving what they need to grow.', 'symbol': '🎈'}, {'message': 'When love is true, it doesn’t ask for constant reassurance. It is secure, even in silence.', 'symbol': '🎉'}, {'message': 'Real love helps you evolve into a better version of yourself, not a different one.', 'symbol': '🎂'}, {'message': 'True love is not about fixing the other person; it’s about growing together while accepting imperfections.', 'symbol': '🎄'}, {'message': 'In relationships, kindness is often more important than being right. Choose compassion over ego.', 'symbol': '🎇'}, {'message': 'A relationship without communication is like a ship without a rudder, destined to drift aimlessly.', 'symbol': '🧚'}, {'message': 'The depth of your love is measured by how much you’re willing to give without expecting anything in return.', 'symbol': '🌠'}, {'message': 'Love will sometimes hurt, but it should never harm. Know the difference.', 'symbol': '🍎'}, {'message': 'The beauty of a strong relationship is found in its imperfections, in how it grows through struggles.', 'symbol': '🍒'}, {'message': 'Real love doesn’t complete you; it complements you. You are whole as you are.', 'symbol': '🦄'}, {'message': 'True love lets you be yourself. It doesn’t ask you to change to fit someone else’s mold.', 'symbol': '🎯'}, {'message': 'A successful relationship is not measured by the time spent together, but by the growth achieved together.', 'symbol': '🌳'}, {'message': 'In love, patience is a virtue. Let time reveal the depths of your connection.', 'symbol': '🎶'}, {'message': 'The most fulfilling relationships are those where both partners are free to be themselves, without fear of judgment.', 'symbol': '🌻'}, {'message': 'True love survives the hardest of times and shines the brightest in the darkest hours.', 'symbol': '🌾'}, {'message': 'Real love doesn’t seek perfection; it finds beauty in imperfection.', 'symbol': '🍂'}, {'message': "Real love isn't about being inseparable; it's about being separated and nothing changes.", 'symbol': '🍁'}, {'message': "Love is not just a feeling; it's a daily practice of patience, understanding, and giving.", 'symbol': '🍇'}];
+
+        let availableMessages = [...messages]; // Clone of messages array to track remaining messages
+        let shownMessages = []; // Track messages shown in a session
+
+        // Error checking: Ensure there are 55 unique messages
+        function checkMessages() {
+            if (messages.length !== 55) {
+                alert("Error: There are not exactly 55 messages in the array.");
+                return false;
+            }
+            const uniqueMessages = new Set(messages.map(item => item.message));
+            if (uniqueMessages.size !== 55) {
+                alert("Error: There are duplicate messages. Please ensure all messages are unique.");
+                return false;
+            }
+            return true;
+        }
+
+        // Function to shuffle an array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Event listener for button click
+        document.getElementById('revealButton').addEventListener('click', function() {
+            // Error check before proceeding
+            if (!checkMessages()) return;
+
+            // If all messages have been shown in the session, reset the list
+            if (availableMessages.length === 0) {
+                availableMessages = [...messages]; // Reset to the full list
+                shownMessages = []; // Clear the shown messages for this session
+                shuffleArray(availableMessages);    // Shuffle the new list
+                alert("All messages have been shown! Starting again.");
+            }
+
+            // Select a random message that has not been shown in this session
+            let selectedMessage;
+            do {
+                const randomIndex = Math.floor(Math.random() * availableMessages.length);
+                selectedMessage = availableMessages[randomIndex];
+            } while (shownMessages.includes(selectedMessage));
+
+            // Remove the selected message from availableMessages and add to shownMessages
+            availableMessages = availableMessages.filter(msg => msg !== selectedMessage);
+            shownMessages.push(selectedMessage);
+
+            // Display the selected message
+            document.getElementById('messageBox').innerHTML = `<p>${selectedMessage.message} ${selectedMessage.symbol}</p>`;
+        });
+    </script>
+</body>
+</html>
